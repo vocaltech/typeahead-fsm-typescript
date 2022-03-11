@@ -22,18 +22,23 @@ describe('TypeaheadFsmMap test', () => {
         expect(currentState).toBe(TypeaheadStates.READY_FOR_INPUT)
     })
 
-    it(' should return SUGGESTIONS_VISIBLE from SUGGESTIONS_VISIBLE (test1)', () => { 
+    it(' should return SUGGESTIONS_VISIBLE from SUGGESTIONS_VISIBLE state (test1)', () => { 
         currentState = TypeaheadFsmMap.states.SUGGESTIONS_VISIBLE.text_changed
         expect(currentState).toBe(TypeaheadStates.SUGGESTIONS_VISIBLE)
     })
 
-    it(' should return SUGGESTIONS_VISIBLE from SUGGESTIONS_VISIBLE (test2)', () => { 
+    it(' should return SUGGESTIONS_VISIBLE from SUGGESTIONS_VISIBLE state (test2)', () => { 
         currentState = TypeaheadFsmMap.states.SUGGESTIONS_VISIBLE.highlighted_suggestion_changed
         expect(currentState).toBe(TypeaheadStates.SUGGESTIONS_VISIBLE)
     })
 
-    it(' should return SELECTED from SUGGESTIONS_VISIBLE', () => { 
+    it(' should return SELECTED from SUGGESTIONS_VISIBLE state', () => { 
         currentState = TypeaheadFsmMap.states.SUGGESTIONS_VISIBLE.selection_entered
         expect(currentState).toBe(TypeaheadStates.SELECTED)
+    })
+
+    it(' should return READY_FOR_INPUT from SELECTED state', () => { 
+        currentState = TypeaheadFsmMap.states.SELECTED.selection_cleared
+        expect(currentState).toBe(TypeaheadStates.READY_FOR_INPUT)
     })
 })

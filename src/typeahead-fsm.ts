@@ -32,6 +32,9 @@ export const TypeaheadFsmMap = {
             [TypeaheadEvents.selection_entered]: TypeaheadStates.SELECTED,
             [TypeaheadEvents.text_changed]: TypeaheadStates.SUGGESTIONS_VISIBLE,
             [TypeaheadEvents.highlighted_suggestion_changed]: TypeaheadStates.SUGGESTIONS_VISIBLE
+        },
+        [TypeaheadStates.SELECTED]: {
+            [TypeaheadEvents.selection_cleared]: TypeaheadStates.READY_FOR_INPUT
         }
     }
 }
