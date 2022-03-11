@@ -1,0 +1,13 @@
+@startuml typeahead-fsm-state-diagram
+scale 550 width
+hide empty description
+
+[*] --> READY_FOR_INPUT: data_loaded
+READY_FOR_INPUT --> SUGGESTIONS_VISIBLE: got_input_focus
+SUGGESTIONS_VISIBLE --> READY_FOR_INPUT: lost_input_focus
+SUGGESTIONS_VISIBLE --> SUGGESTIONS_VISIBLE: text_changed
+SUGGESTIONS_VISIBLE --> SUGGESTIONS_VISIBLE: highlighted_suggestion_changed
+SUGGESTIONS_VISIBLE --> SELECTED: selection_entered
+SELECTED --> READY_FOR_INPUT: selection_cleared
+
+@enduml
