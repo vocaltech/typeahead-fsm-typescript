@@ -23,6 +23,9 @@ export const TypeaheadFsmMap = {
     states: {
         [TypeaheadStates.INIT]: {
             [TypeaheadEvents.data_loaded]: TypeaheadStates.READY_FOR_INPUT
+        },
+        [TypeaheadStates.READY_FOR_INPUT]: {
+            [TypeaheadEvents.got_input_focus]: TypeaheadStates.SUGGESTIONS_VISIBLE
         }
     }
 }

@@ -11,4 +11,9 @@ describe('TypeaheadFsmMap test', () => {
         currentState = TypeaheadFsmMap.states.INIT.data_loaded
         expect(currentState).toBe(TypeaheadStates.READY_FOR_INPUT)
     })
+
+    it(' should return SUGGESTIONS_VISIBLE from READY_FOR_INPUT state', () => { 
+        currentState = TypeaheadFsmMap.states.READY_FOR_INPUT.got_input_focus
+        expect(currentState).toBe(TypeaheadStates.SUGGESTIONS_VISIBLE)
+    })
 })
