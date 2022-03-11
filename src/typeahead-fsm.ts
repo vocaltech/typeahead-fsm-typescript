@@ -26,6 +26,12 @@ export const TypeaheadFsmMap = {
         },
         [TypeaheadStates.READY_FOR_INPUT]: {
             [TypeaheadEvents.got_input_focus]: TypeaheadStates.SUGGESTIONS_VISIBLE
+        },
+        [TypeaheadStates.SUGGESTIONS_VISIBLE]: {
+            [TypeaheadEvents.lost_input_focus]: TypeaheadStates.READY_FOR_INPUT,
+            [TypeaheadEvents.selection_entered]: TypeaheadStates.SELECTED,
+            [TypeaheadEvents.text_changed]: TypeaheadStates.SUGGESTIONS_VISIBLE,
+            [TypeaheadEvents.highlighted_suggestion_changed]: TypeaheadStates.SUGGESTIONS_VISIBLE
         }
     }
 }
