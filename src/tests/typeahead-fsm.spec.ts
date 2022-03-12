@@ -1,6 +1,5 @@
 import { TypeaheadStates, TypeaheadEvents, TypeaheadFsmMap, isTextChanged, getSuggestions } from '../typeahead-fsm'
 import { depts_villes } from '../models/depts_villes'
-import exp from 'constants';
 
 describe('TypeaheadFsmMap test', () => {
     let currentState = TypeaheadFsmMap.initialState;
