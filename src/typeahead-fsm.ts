@@ -20,6 +20,18 @@ export enum TypeaheadEvents {
     move_highlighted_suggestion_down = 'move_highlighted_suggestion_down'
 }
 
+export const isTextChanged = (text: string): boolean => {
+    if (text !== '') {
+        console.log(`text changed: ${text}`)
+        return true
+    }
+    return false
+}
+
+export const getSuggestions = (text: string): string[] => {
+    return depts_villes.filter(item => item.startsWith(text))
+}
+
 // fsm map
 export const TypeaheadFsmMap = {
     initialState: TypeaheadStates.INIT,
@@ -28,20 +40,20 @@ export const TypeaheadFsmMap = {
             [TypeaheadEvents.data_loaded]: TypeaheadStates.READY_FOR_INPUT
         },
         [TypeaheadStates.READY_FOR_INPUT]: {
-            [TypeaheadEvents.got_input_focus]: TypeaheadStates.SUGGESTIONS_VISIBLE,
             depts_villes,
-            text: ''
+            text: '',
+            [TypeaheadEvents.got_input_focus]: TypeaheadStates.SUGGESTIONS_VISIBLE
         },
         [TypeaheadStates.SUGGESTIONS_VISIBLE]: {
+            depts_villes,
+            text: '',
+            suggestions: [''],
+            suggestionIdx: 0,
             [TypeaheadEvents.lost_input_focus]: TypeaheadStates.READY_FOR_INPUT,
             [TypeaheadEvents.selection_entered]: TypeaheadStates.SELECTED,
             [TypeaheadEvents.text_changed]: TypeaheadStates.SUGGESTIONS_VISIBLE,
             [TypeaheadEvents.move_highlighted_suggestion_down]: TypeaheadStates.SUGGESTIONS_VISIBLE,
-            [TypeaheadEvents.move_highlighted_suggestion_up]: TypeaheadStates.SUGGESTIONS_VISIBLE,
-            depts_villes,
-            text: '',
-            suggestions: [''],
-            suggestionIdx: 0
+            [TypeaheadEvents.move_highlighted_suggestion_up]: TypeaheadStates.SUGGESTIONS_VISIBLE
         },
         [TypeaheadStates.SELECTED]: {
             [TypeaheadEvents.selection_cleared]: TypeaheadStates.READY_FOR_INPUT,
