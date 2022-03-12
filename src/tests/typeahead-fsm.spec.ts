@@ -1,4 +1,4 @@
-import { TypeaheadStates, TypeaheadEvents, TypeaheadFsmMap } from '../typeahead-fsm'
+import { TypeaheadStates, TypeaheadEvents, TypeaheadFsmMap, isTextChanged, getSuggestions } from '../typeahead-fsm'
 import { depts_villes } from '../models/depts_villes'
 import exp from 'constants';
 
@@ -29,6 +29,15 @@ describe('TypeaheadFsmMap test', () => {
     it(' should return SUGGESTIONS_VISIBLE from SUGGESTIONS_VISIBLE state (test1)', () => { 
         currentState = TypeaheadFsmMap.states.SUGGESTIONS_VISIBLE.text_changed
         expect(currentState).toBe(TypeaheadStates.SUGGESTIONS_VISIBLE)
+
+        // we assume that the user has typed '31'
+        TypeaheadFsmMap.states.SUGGESTIONS_VISIBLE.text = '11'
+
+        // add actions
+        const curText = TypeaheadFsmMap.states.SUGGESTIONS_VISIBLE.text
+        if (isTextChanged(curText)) {
+            console.log(getSuggestions(curText))
+        }
     })
 
     it(' should return SUGGESTIONS_VISIBLE from SUGGESTIONS_VISIBLE state (test2)', () => { 
