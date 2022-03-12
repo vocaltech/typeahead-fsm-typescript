@@ -1,4 +1,6 @@
 import { TypeaheadStates, TypeaheadEvents, TypeaheadFsmMap } from '../typeahead-fsm'
+import { depts_villes } from '../models/depts_villes'
+import exp from 'constants';
 
 describe('TypeaheadFsmMap test', () => {
     let currentState = TypeaheadFsmMap.initialState;
@@ -10,6 +12,8 @@ describe('TypeaheadFsmMap test', () => {
     it(' should return READY_FOR_INPUT from INIT state', () => { 
         currentState = TypeaheadFsmMap.states.INIT.data_loaded
         expect(currentState).toBe(TypeaheadStates.READY_FOR_INPUT)
+        expect(TypeaheadFsmMap.states.READY_FOR_INPUT.depts_villes).toEqual(depts_villes)
+        expect(TypeaheadFsmMap.states.READY_FOR_INPUT.text).toBe('')
     })
 
     it(' should return SUGGESTIONS_VISIBLE from READY_FOR_INPUT state', () => { 
@@ -28,7 +32,12 @@ describe('TypeaheadFsmMap test', () => {
     })
 
     it(' should return SUGGESTIONS_VISIBLE from SUGGESTIONS_VISIBLE state (test2)', () => { 
-        currentState = TypeaheadFsmMap.states.SUGGESTIONS_VISIBLE.highlighted_suggestion_changed
+        currentState = TypeaheadFsmMap.states.SUGGESTIONS_VISIBLE.move_highlighted_suggestion_down
+        expect(currentState).toBe(TypeaheadStates.SUGGESTIONS_VISIBLE)
+    })
+
+    it(' should return SUGGESTIONS_VISIBLE from SUGGESTIONS_VISIBLE state (test3)', () => { 
+        currentState = TypeaheadFsmMap.states.SUGGESTIONS_VISIBLE.move_highlighted_suggestion_up
         expect(currentState).toBe(TypeaheadStates.SUGGESTIONS_VISIBLE)
     })
 
